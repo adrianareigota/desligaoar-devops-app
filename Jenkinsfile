@@ -71,7 +71,7 @@ pipeline {
                     steps {
                         echo 'Push latest para AWS ECR'
                         script {
-                            docker.withRegistry('https://933273154934.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:awsdvops') {
+                            docker.withRegistry('https://690516794798.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:ecr-digitalhouse-neon') {
                                 docker.image('digitalhouse-devops').push()
                             }
                         }
@@ -91,7 +91,7 @@ pipeline {
                 script {
                     if(env.GIT_BRANCH=='origin/master'){
  
-                        docker.withRegistry('https://933273154934.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:awsdvops') {
+                        docker.withRegistry('https://690516794798.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:ecr-digitalhouse-neon') {
                             docker.image('digitalhouse-devops').pull()
                         }
 
@@ -99,7 +99,7 @@ pipeline {
                         sh "hostname"
                         sh "docker stop app1"
                         sh "docker rm app1"
-                        sh "docker run -d --name app1 -p 8030:3000 933273154934.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
+                        sh "docker run -d --name app1 -p 8030:3000 690516794798.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
                         sh "docker ps"
                         sh 'sleep 10'
                         sh 'curl http://127.0.0.1:8030/api/v1/healthcheck'
