@@ -72,7 +72,7 @@ pipeline {
                         echo 'Push latest para AWS ECR'
                         script {
                             docker.withRegistry('https://690516794798.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:user-ecr-digitalhouse-neon') {
-                                docker.image('digitalhouse-devops').push()
+                                docker.image('ecr-digitalhouse-neon').push()
                             }
                         }
                     }
@@ -92,7 +92,7 @@ pipeline {
                     if(env.GIT_BRANCH=='origin/master'){
  
                         docker.withRegistry('https://690516794798.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:user-ecr-digitalhouse-neon') {
-                            docker.image('digitalhouse-devops').pull()
+                            docker.image('ecr-digitalhouse-neon').pull()
                         }
 
                         echo 'Deploy para Desenvolvimento'
@@ -135,7 +135,7 @@ pipeline {
 
 
                         docker.withRegistry('https://933273154934.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:awsdvops') {
-                            docker.image('digitalhouse-devops').pull()
+                            docker.image('ecr-digitalhouse-neon').pull()
                         }
 
                         echo 'Deploy para Producao'
