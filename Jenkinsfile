@@ -3,8 +3,8 @@ pipeline {
     agent none
 
     environment {
-
-        NODE_ENV="development"
+        
+        NODE_ENV="homologacao"
         AWS_ACCESS_KEY=""
         AWS_SECRET_ACCESS_KEY=""
         AWS_SDK_LOAD_CONFIG="0"
@@ -123,7 +123,7 @@ pipeline {
  
                         environment {
 
-                            NODE_ENV="production"
+                            NODE_ENV="producao"
                             AWS_ACCESS_KEY="123456"
                             AWS_SECRET_ACCESS_KEY="asdfghjkkll"
                             AWS_SDK_LOAD_CONFIG="0"
