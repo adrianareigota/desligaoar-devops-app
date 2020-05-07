@@ -8,8 +8,8 @@ pipeline {
         AWS_ACCESS_KEY=""
         AWS_SECRET_ACCESS_KEY=""
         AWS_SDK_LOAD_CONFIG="0"
-        BUCKET_NAME="app-digital"
-        REGION="us-east-1" 
+        BUCKET_NAME="digitalhouse-desligaoar-homolog"
+        REGION="sa-east-1" 
         PERMISSION=""
         ACCEPTED_FILE_FORMATS_ARRAY=""
         VERSION="1.0.0"
@@ -89,7 +89,7 @@ pipeline {
 
             steps { 
                 script {
-                    if(env.GIT_BRANCH=='origin/dev'){
+                    if(env.GIT_BRANCH=='origin/master'){
  
                         docker.withRegistry('https://933273154934.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:awsdvops') {
                             docker.image('digitalhouse-devops').pull()
@@ -119,7 +119,7 @@ pipeline {
 
             steps { 
                 script {
-                    if(env.GIT_BRANCH=='origin/prod'){
+                    if(env.GIT_BRANCH=='origin/master'){
  
                         environment {
 
@@ -127,8 +127,8 @@ pipeline {
                             AWS_ACCESS_KEY="123456"
                             AWS_SECRET_ACCESS_KEY="asdfghjkkll"
                             AWS_SDK_LOAD_CONFIG="0"
-                            BUCKET_NAME="app-digital"
-                            REGION="us-east-1" 
+                            BUCKET_NAME="digitalhouse-desligaoar-producao"
+                            REGION="sa-east-1" 
                             PERMISSION=""
                             ACCEPTED_FILE_FORMATS_ARRAY=""
                         }
