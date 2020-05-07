@@ -67,7 +67,7 @@ pipeline {
                     }
                 }
 
-                /*stage('Docker push') {
+                stage('Docker push') {
                     steps {
                         echo 'Push latest para AWS ECR'
                         script {
@@ -76,7 +76,7 @@ pipeline {
                             }
                         }
                     }
-                }*/
+                }
             }
         }
 
