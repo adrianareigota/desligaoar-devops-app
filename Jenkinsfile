@@ -71,7 +71,7 @@ pipeline {
                     steps {
                         echo 'Push latest para AWS ECR'
                         script {
-                            docker.withRegistry('https://690516794798.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:ecr-digitalhouse-neon') {
+                            docker.withRegistry('https://690516794798.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:user-ecr-digitalhouse-neon') {
                                 docker.image('digitalhouse-devops').push()
                             }
                         }
@@ -91,7 +91,7 @@ pipeline {
                 script {
                     if(env.GIT_BRANCH=='origin/master'){
  
-                        docker.withRegistry('https://690516794798.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:ecr-digitalhouse-neon') {
+                        docker.withRegistry('https://690516794798.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:user-ecr-digitalhouse-neon') {
                             docker.image('digitalhouse-devops').pull()
                         }
 
@@ -100,15 +100,15 @@ pipeline {
                         sh "docker stop app1"
                         sh "docker rm app1"
                         
-                        withCredentials([[$class:'AmazonWebServicesCredentialsBinding', credentialsId: 'homolog_s3']]) {
+                       // withCredentials([[$class:'AmazonWebServicesCredentialsBinding', credentialsId: 'homolog_s3']]) {
                         
-                           // sh "docker run -d --name app1 -p 8030:3000 690516794798.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
+                            sh "docker run -d --name app1 -p 8030:3000 690516794798.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
                            // sh "docker run -d -p 9080:80 -e NODE_ENV=production -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME= nginx:latest"
-                            sh "docker run -d -p 80:3000 -e NODE_ENV=production -e AWS_ACCESS_KEY="" -e AWS_SECRET_ACCESS_KEY="" -e BUCKET_NAME="" --name app_homolog digitalhouse/pi:1.0.0 "
+                           // sh "docker run -d -p 80:3000 -e NODE_ENV=production -e AWS_ACCESS_KEY="" -e AWS_SECRET_ACCESS_KEY="" -e BUCKET_NAME="" --name app_homolog digitalhouse/pi:1.0.0 "
                             sh "docker ps"
                             sh 'sleep 10'
                             sh 'curl http://127.0.0.1:8030/api/v1/healthcheck'
-                        }
+                       // }
 
                     }
                 }
