@@ -4,7 +4,7 @@ pipeline {
 
     environment {
         
-        NODE_ENV="homologacao"
+        NODE_ENV="homolog"
         AWS_ACCESS_KEY=""
         AWS_SECRET_ACCESS_KEY=""
         AWS_SDK_LOAD_CONFIG="0"
@@ -67,7 +67,7 @@ pipeline {
                     }
                 }
 
-                stage('Docker push') {
+                /*stage('Docker push') {
                     steps {
                         echo 'Push latest para AWS ECR'
                         script {
@@ -76,11 +76,11 @@ pipeline {
                             }
                         }
                     }
-                }
+                }*/
             }
         }
 
-        stage('Deploy to DEV') {
+        stage('Deploy to homolog') {
             agent {  
                 node {
                     label 'HOMOLOG'
@@ -110,7 +110,7 @@ pipeline {
 
         }
 
-        stage('Deploy to Producao') {
+        stage('Deploy to producao') {
             agent {  
                 node {
                     label 'PROD'
@@ -138,7 +138,7 @@ pipeline {
                             docker.image('digitalhouse-devops').pull()
                         }
 
-                        echo 'Deploy para Desenvolvimento'
+                        echo 'Deploy para Producao'
                         sh "hostname"
                         sh "docker stop app1"
                         sh "docker rm app1"
