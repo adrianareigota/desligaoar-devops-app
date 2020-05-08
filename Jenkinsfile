@@ -152,9 +152,9 @@ pipeline {
                             sh "docker rm app2"
                         }
                         withCredentials([[$class:'AmazonWebServicesCredentialsBinding' 
-                            , credentialsId: 'homolog_s3']]) {
+                            , credentialsId: 'prod_s3']]) {
                         
-                            sh "docker run -d --name app2 -p 8030:3000 -e NODE_ENV=producao -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=digitalhouse-desligaoar-homolog 690516794798.dkr.ecr.us-east-1.amazonaws.com/ecr-digitalhouse-neon:latest"
+                            sh "docker run -d --name app2 -p 8030:3000 -e NODE_ENV=producao -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=digitalhouse-desligaoar-producao 690516794798.dkr.ecr.us-east-1.amazonaws.com/ecr-digitalhouse-neon:latest"
                         }
                         sh "docker ps"
                         sh 'sleep 10'
