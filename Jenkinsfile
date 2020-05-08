@@ -91,6 +91,9 @@ pipeline {
                 script {
                     if(env.GIT_BRANCH=='origin/master'){
  
+                       /* docker.withRegistry('https://690516794798.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:user-ecr-digitalhouse-neon') {
+                            docker.image('ecr-digitalhouse-neon').pull()
+                        } */
                         docker.withRegistry('https://690516794798.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:user-ecr-digitalhouse-neon') {
                             docker.image('ecr-digitalhouse-neon').pull()
                         }
@@ -102,7 +105,8 @@ pipeline {
                         //sh "docker run -d --name app1 -p 8030:3000 690516794798.dkr.ecr.us-east-1.amazonaws.com/ecr-digitalhouse-neon:latest"
                         withCredentials([[$class:'AmazonWebServicesCredentialsBinding' 
                             , credentialsId: 'homolog_s3']]) {
-                        sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=homolog -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=nome-bucket-homolog-grupo 933273154934.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
+                        //sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=homolog -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=nome-bucket-homolog-grupo 933273154934.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
+                        sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=homolog -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=digitalhouse-desligaoar-homolog 690516794798.dkr.ecr.us-east-1.amazonaws.com/ecr-digitalhouse-neon:latest"
                         }
                         sh "docker ps"
                         sh 'sleep 10'
@@ -146,7 +150,12 @@ pipeline {
                         sh "hostname"
                         // sh "docker stop app1"
                         // sh "docker rm app1"
-                        sh "docker run -d --name app1 -p 8030:3000 933273154934.dkr.ecr.us-east-1.amazonaws.com/ecr-digitalhouse-neon:latest"
+                        // sh "docker run -d --name app1 -p 8030:3000 933273154934.dkr.ecr.us-east-1.amazonaws.com/ecr-digitalhouse-neon:latest"
+                        withCredentials([[$class:'AmazonWebServicesCredentialsBinding' 
+                            , credentialsId: 'homolog_s3']]) {
+                        //sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=homolog -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=nome-bucket-homolog-grupo 933273154934.dkr.ecr.us-east-1.amazonaws.com/digitalhouse-devops:latest"
+                        sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=homolog -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME=digitalhouse-desligaoar-homolog 690516794798.dkr.ecr.us-east-1.amazonaws.com/ecr-digitalhouse-neon:latest"
+                        }
                         sh "docker ps"
                         sh 'sleep 10'
                         sh 'curl http://127.0.0.1:8030/api/v1/healthcheck'
