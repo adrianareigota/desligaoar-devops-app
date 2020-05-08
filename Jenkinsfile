@@ -97,8 +97,8 @@ pipeline {
 
                         echo 'Deploy para Desenvolvimento'
                         sh "hostname"
-                         //sh "docker stop app1"
-                        //sh "docker rm app1"
+                        sh "docker stop app1"
+                        sh "docker rm app1"
                         //sh "docker run -d --name app1 -p 8030:3000 690516794798.dkr.ecr.us-east-1.amazonaws.com/ecr-digitalhouse-neon:latest"
                         withCredentials([[$class:'AmazonWebServicesCredentialsBinding', credentialsId: 'homolog_s3']]) {
                             sh "docker run -d --name app1 -p 8030:3000 -e NODE_ENV=homolog -e AWS_ACCESS_KEY=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY -e BUCKET_NAME= 690516794798.dkr.ecr.us-east-1.amazonaws.com/ecr-digitalhouse-neon:latest"
