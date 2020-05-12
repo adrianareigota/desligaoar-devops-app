@@ -35,7 +35,7 @@ pipeline {
                 stage('Clone repository') {
                     steps {
                         script {
-                            if(env.GIT_BRANCH=='origin/master'){
+                            if(env.GIT_BRANCH=='origin/homolog'){
                                 checkout scm
                             }
                             sh('printenv | sort')
@@ -89,7 +89,7 @@ pipeline {
 
             steps { 
                 script {
-                    if(env.GIT_BRANCH=='origin/master'){
+                    if(env.GIT_BRANCH=='origin/homolog'){
  
                         docker.withRegistry('https://690516794798.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:user-ecr-digitalhouse-neon') {
                             docker.image('ecr-digitalhouse-neon').pull()
