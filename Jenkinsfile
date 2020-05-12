@@ -113,7 +113,7 @@ pipeline {
 
         }
 
-        stage('Deploy to producao') {
+      /* stage('Deploy to producao') {
             agent {  
                 node {
                     label 'PROD'
@@ -152,7 +152,7 @@ pipeline {
 
                     }
                 }
-            }
+            } */
 
         }
 
