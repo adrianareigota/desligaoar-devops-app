@@ -80,7 +80,7 @@ pipeline {
             }
         }
 
-        stage('Deploy to homolog') {
+   /*   stage('Deploy to homolog') {
             agent {  
                 node {
                     label 'HOMOLOG'
@@ -115,7 +115,7 @@ pipeline {
                 }
             }
 
-        }
+        } */
 
         stage('Deploy to producao') {
             agent {  
