@@ -1,6 +1,6 @@
 FROM node:10-slim
 
-LABEL maintainer="Bruno Souza <bruno@bgsouza.com>"
+LABEL maintainer="Adriana Reigota <adrianareigota@gmail.com>"
 
 WORKDIR /usr/app
 COPY . .
